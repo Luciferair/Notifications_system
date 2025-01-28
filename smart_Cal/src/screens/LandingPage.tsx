@@ -6,18 +6,17 @@ import Navbar from '../components/Navbar'
 
 function LandingPage() {
     const [isDark, setIsDark] = useState(true)
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
+    
 
     return (
-        <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-white' : 'bg-gradient-to-b from-blue-50 to-white'}`}>
+        <div className={`min-h-screen flex flex-col ${isDark ? 'bg-gray-900 text-white' : 'bg-gradient-to-b from-blue-50 to-white'}`}>
             <div className="fixed inset-0 -z-10">
                 <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'} animate-gradient`}></div>
             </div>
 
-            <Navbar isDark={isDark} setIsDark={setIsDark} isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
+            <Navbar isDark={isDark} setIsDark={setIsDark}/>
 
-            <main>
+            <main className="flex-grow">
                 <Hero isDark={isDark} />
                 <div className={`${isDark ? 'bg-gray-800/50' : 'bg-white/50'} py-12 sm:py-16 backdrop-blur-xl`}>
                     <div className="max-w-7xl mx-auto px-4">
@@ -49,7 +48,6 @@ function LandingPage() {
 
                 <Featurescard isDark={isDark} />
             </main>
-
 
             <footer className={`${isDark ? 'bg-gray-800/80' : 'bg-gray-50/80'} py-8 sm:py-12 backdrop-blur-xl`}>
                 <div className="max-w-7xl mx-auto px-4 text-center">

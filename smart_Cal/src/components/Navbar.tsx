@@ -1,17 +1,15 @@
 import { motion } from 'framer-motion';
-import React from 'react'
+import React, { useState } from 'react'
 
 
 interface NavbarProps {
     isDark: boolean;
     setIsDark: React.Dispatch<React.SetStateAction<boolean>>;
-    isMobileMenuOpen: boolean;
-    setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Navbar({ isDark, setIsDark, isMobileMenuOpen, setIsMobileMenuOpen }: NavbarProps) {
+function Navbar({ isDark, setIsDark }: NavbarProps) {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-    
     return (
         <nav className={`${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg sticky top-0 z-50`}>
             <div className="max-w-7xl mx-auto px-4 py-4">
