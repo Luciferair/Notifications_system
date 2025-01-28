@@ -1,50 +1,70 @@
-# React + TypeScript + Vite
+# TaskMaster Pro - Smart Task & Reminder System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 🚧 **Note: This project is currently under active development** 🚧
 
-Currently, two official plugins are available:
+## Introduction
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+TaskMaster Pro is a modern task and reminder management system designed to help individuals and teams stay organized in today's fast-paced digital world. By leveraging AI-powered features and intuitive design, our system transforms the way users handle tasks, deadlines, and goals.
 
-## Expanding the ESLint configuration
+## Key Features (In Development)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Calendar Management
+- 📅 Seamless integration with Google Calendar and iCal
+- 🤖 AI-powered automated scheduling
+- ↻ Dynamic rescheduling capabilities
 
-- Configure the top-level `parserOptions` property like this:
+### User Experience
+- 🎨 Clean, intuitive interface for effortless task management
+- 👥 Team collaboration tools
+- 📱 Offline functionality with smart syncing
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Smart Notifications
+- 🔔 Context-aware notification system
+- 📍 Location-based reminders
+- ⏰ Customizable snooze options
+
+### Cross-Platform
+- 💻 Web application
+- 📱 Mobile responsive design
+- 🌐 Cross-device synchronization
+
+## Project Goals
+
+- **Productivity Enhancement**: Streamline task management and time allocation
+- **Improved Organization**: Centralize all tasks and reminders
+- **Stress Reduction**: Prevent missed deadlines through smart notifications
+- **Flexibility**: Provide seamless access across all devices
+
+## Development Status
+
+### Currently Working On
+- 🔨 Core task management system
+- 🔨 Calendar integration framework
+- 🔨 Basic notification system
+
+### Coming Soon
+- 📋 Team collaboration features
+- 📋 AI-powered task scheduling
+- 📋 Location-based reminders
+
+## Technical Stack
+
+- React + TypeScript
+- Vite for build tooling
+- Modern ESLint configuration
+- SWC for Fast Refresh
+
+## Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/Luciferair/Notifications_system.git
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
