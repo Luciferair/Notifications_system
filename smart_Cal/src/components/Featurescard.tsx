@@ -1,13 +1,11 @@
 import { motion } from 'framer-motion'
 import { Features } from '../constant';
+import { useThemeStore } from '../store/ThemeStore';
 
 
-interface FeaturescardProps {
-    isDark: boolean;
 
-}
-
-function Featurescard({ isDark }: FeaturescardProps) {
+function Featurescard() {
+    const { isDark } = useThemeStore(); 
     const fadeInUp = {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0 },

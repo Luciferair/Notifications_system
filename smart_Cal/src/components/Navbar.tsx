@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion';
-import React, { useState } from 'react'
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useUser, UserButton  } from "@clerk/clerk-react";
+import { useThemeStore } from '../store/ThemeStore';
 
 
-interface NavbarProps {
-    isDark: boolean;
-    setIsDark: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function Navbar({ isDark, setIsDark }: NavbarProps) {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+function Navbar() {
+    const { isDark, setIsDark } = useThemeStore();
+    const { isSignedIn } = useUser();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <nav className={`${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg sticky top-0 z-50`}>
@@ -21,17 +22,23 @@ function Navbar({ isDark, setIsDark }: NavbarProps) {
                         TaskMinder
                     </motion.h1>
 
-                    {/* Desktop Navigation */}
                     <div className="hidden md:flex space-x-6">
                         <button className={`${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition-colors`}>Features</button>
                         <button className={`${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition-colors`}>About</button>
-                        <motion.button
-                            className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white px-4 py-2 rounded-lg`}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Get Started
-                        </motion.button>
+
+                        {isSignedIn ? (
+                            <UserButton />
+                        ) : (
+                            <motion.button
+                                className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white px-4 py-2 rounded-lg`}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => navigate('/dashboard')}
+                            >
+                                Get Started
+                            </motion.button>
+                        )}
+
                         <button
                             onClick={() => setIsDark(!isDark)}
                             className="p-2 rounded-full hover:bg-gray-700 transition-colors"
@@ -64,11 +71,18 @@ function Navbar({ isDark, setIsDark }: NavbarProps) {
                 >
                     <button className={`${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition-colors w-full text-left py-2`}>Features</button>
                     <button className={`${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition-colors w-full text-left py-2`}>About</button>
-                    <button className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white px-4 py-2 rounded-lg w-full`}>Get Started</button>
+                    <motion.button
+                        className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white px-4 py-2 rounded-lg w-full`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => navigate('/dashboard')}
+                    >
+                        Get Started
+                    </motion.button>
                 </motion.div>
             </div>
         </nav>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

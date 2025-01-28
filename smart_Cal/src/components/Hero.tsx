@@ -1,11 +1,12 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { jk } from '../assets';
+import { useNavigate } from "react-router-dom";
+import { useThemeStore } from '../store/ThemeStore';
 
-interface HeroProps {
-    isDark: boolean;
-}
 
-function Hero({ isDark }: HeroProps) {
+function Hero() {
+    const { isDark } = useThemeStore(); 
+    const navigate = useNavigate();
     const { scrollYProgress } = useScroll()
     const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8])
 
@@ -35,6 +36,7 @@ function Hero({ isDark }: HeroProps) {
                                 className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white px-8 py-4 rounded-lg text-lg shadow-lg backdrop-blur-sm`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
+                                onClick={() => navigate('/dashboard')}
                             >
                                 Get Started Free
                             </motion.button>

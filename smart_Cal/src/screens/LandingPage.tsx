@@ -1,11 +1,12 @@
-import { useState } from 'react'
+
 import { motion } from 'framer-motion'
 import Hero from '../components/Hero'
 import Featurescard from '../components/Featurescard'
 import Navbar from '../components/Navbar'
+import { useThemeStore } from '../store/ThemeStore'
 
 function LandingPage() {
-    const [isDark, setIsDark] = useState(true)
+    const { isDark } = useThemeStore(); 
     
 
     return (
@@ -14,10 +15,10 @@ function LandingPage() {
                 <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'} animate-gradient`}></div>
             </div>
 
-            <Navbar isDark={isDark} setIsDark={setIsDark}/>
+            <Navbar />
 
             <main className="flex-grow">
-                <Hero isDark={isDark} />
+                <Hero />
                 <div className={`${isDark ? 'bg-gray-800/50' : 'bg-white/50'} py-12 sm:py-16 backdrop-blur-xl`}>
                     <div className="max-w-7xl mx-auto px-4">
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
@@ -46,7 +47,7 @@ function LandingPage() {
                     </div>
                 </div>
 
-                <Featurescard isDark={isDark} />
+                <Featurescard />
             </main>
 
             <footer className={`${isDark ? 'bg-gray-800/80' : 'bg-gray-50/80'} py-8 sm:py-12 backdrop-blur-xl`}>
