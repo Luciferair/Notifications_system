@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useThemeStore } from '../../store/ThemeStore';
-import { FiCheckCircle, FiClock } from 'react-icons/fi';
+import { FiCheckCircle, FiClock, FiTrash2 } from 'react-icons/fi';
 
 interface Task {
     id: string;
@@ -16,6 +16,11 @@ interface Task {
 
 function TaskCard({ task }: { task: Task; }) {
     const { isDark } = useThemeStore();
+    
+    const handleDelete = () => {
+        console.log('Deleting task:', task.id);
+        // Add your delete logic here
+    };
 
     const taskVariants = {
         hidden: { y: 20, opacity: 0 },
@@ -44,14 +49,30 @@ function TaskCard({ task }: { task: Task; }) {
                     }`}>
                     {task.title}
                 </h3>
-                <span className={`px-3 py-1 rounded-full text-sm ${task.status === 'completed'
-                    ? 'bg-green-100 text-green-800'
-                    : isDark
-                        ? 'bg-yellow-200/20 text-yellow-100'
-                        : 'bg-yellow-100 text-yellow-800'
-                    }`}>
-                    {task.status}
-                </span>
+                <div className="flex items-center space-x-2">
+                    <span className={`px-3 py-1 rounded-full text-sm ${task.status === 'completed'
+                        ? 'bg-green-100 text-green-800'
+                        : isDark
+                            ? 'bg-yellow-200/20 text-yellow-100'
+                            : 'bg-yellow-100 text-yellow-800'
+                        }`}>
+                        {task.status}
+                    </span>
+                    <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={handleDelete}
+                        className={`p-1.5 rounded-full hover:bg-red-100 group ${
+                            isDark ? 'hover:bg-red-900/30' : 'hover:bg-red-100'
+                        }`}
+                    >
+                        <FiTrash2 className={`w-4 h-4 ${
+                            isDark 
+                                ? 'text-gray-400 group-hover:text-red-400' 
+                                : 'text-gray-500 group-hover:text-red-500'
+                        } transition-colors`}/>
+                    </motion.button>
+                </div>
             </div>
             <p className={`mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                 {task.description}

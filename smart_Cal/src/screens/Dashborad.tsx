@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { demoTasks } from "../demo";
-import { FiSearch, FiPlus } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import { useThemeStore } from "../store/ThemeStore";
 import { motion } from "framer-motion";
 import TaskCard from "../components/Home/TaskCard";
+import AddFrom from "@/components/Home/AddFrom";
 
 function Dashboard() {
     const { isDark } = useThemeStore();
@@ -57,14 +58,8 @@ function Dashboard() {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
-                        <motion.button 
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="flex items-center justify-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-200"
-                        >
-                            <FiPlus />
-                            <span>Add Task</span>
-                        </motion.button>
+                        
+                        <AddFrom/>
                     </div>
                 </motion.div>
 
