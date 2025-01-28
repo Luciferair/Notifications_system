@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { jk } from '../assets';
 
 interface HeroProps {
     isDark: boolean;
@@ -31,16 +32,14 @@ function Hero({ isDark }: HeroProps) {
                         </p>
                         <div className="flex gap-4">
                             <motion.button
-                                className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} 
-                    text-white px-8 py-4 rounded-lg text-lg shadow-lg backdrop-blur-sm`}
+                                className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white px-8 py-4 rounded-lg text-lg shadow-lg backdrop-blur-sm`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
                                 Get Started Free
                             </motion.button>
                             <motion.button
-                                className={`${isDark ? 'border-blue-500 text-blue-400' : 'border-blue-600 text-blue-600'} 
-                    border-2 px-8 py-4 rounded-lg text-lg hover:bg-blue-500/10`}
+                                className={`${isDark ? 'border-blue-500 text-blue-400' : 'border-blue-600 text-blue-600'} border-2 px-8 py-4 rounded-lg text-lg hover:bg-blue-500/10`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -53,12 +52,11 @@ function Hero({ isDark }: HeroProps) {
                     className="relative"
                     style={{ scale }}
                 >
-                    <div className={`${isDark ? 'bg-gray-800/50' : 'bg-white/50'} 
-                rounded-2xl p-8 backdrop-blur-xl shadow-xl border border-gray-200/20`}>
-                        {/* Add your demo/preview content here */}
+                    <div className={`${isDark ? 'bg-gray-800/50' : 'bg-white/50'} rounded-2xl p-8 backdrop-blur-xl shadow-xl border border-gray-200/20`}>
+                        
                         <div className="h-80 rounded-lg overflow-hidden">
                             <img
-                                src="https://placehold.co/600x400/png"
+                                src={jk}
                                 alt="App Preview"
                                 className="w-full h-full object-cover"
                             />
