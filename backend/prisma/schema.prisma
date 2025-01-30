@@ -24,7 +24,6 @@ model Task {
   email       String
   title       String
   description String
-  time        DateTime
   due_date    DateTime
   completed   Boolean
   createdAt   DateTime @default(now())
