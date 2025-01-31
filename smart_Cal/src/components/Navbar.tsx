@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useUser, UserButton  } from "@clerk/clerk-react";
+import { useUser, UserButton } from "@clerk/clerk-react";
 import { useThemeStore } from '../store/ThemeStore';
 
 
@@ -71,14 +71,21 @@ function Navbar() {
                 >
                     <button className={`${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition-colors w-full text-left py-2`}>Features</button>
                     <button className={`${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition-colors w-full text-left py-2`}>About</button>
-                    <motion.button
-                        className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white px-4 py-2 rounded-lg w-full`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => navigate('/dashboard')}
-                    >
-                        Get Started
-                    </motion.button>
+
+                    {isSignedIn ? (
+                        <UserButton />
+                    ) : (
+                        <motion.button
+                            className={`${isDark ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white px-4 py-2 rounded-lg w-full`}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => navigate('/dashboard')}
+                        >
+                            Get Started
+                        </motion.button>
+
+                    )}
+
                 </motion.div>
             </div>
         </nav>
