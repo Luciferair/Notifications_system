@@ -18,15 +18,18 @@ import { DatePicker } from "./DatePicker";
 import TimePicker from "./TimePicker";
 import { cn } from "@/lib/utils";
 import { Dayjs } from "dayjs";
+import { useUser } from "@clerk/clerk-react";
 
 function AddFrom() {
     const [openDialog, setOpenDialog] = useState(false);
+    const { user } = useUser();
     const [dueDate, setDueDate] = useState<Date | undefined>(undefined);
     const [dueTime, setDueTime] = useState<Dayjs | null>(null);
     const { isDark } = useThemeStore();
     const [formData, setFormData] = useState({
         title: '',
         description: '',
+        email: '',
     });
 
 
@@ -59,13 +62,41 @@ function AddFrom() {
 
     const HandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const taskData = {
-            ...formData,
-            dueDate,
-            dueTime: dueTime ? dueTime.format('HH:mm') : undefined,
-        };
-        console.log(taskData);
-        setOpenDialog(false);
+        
+        try {
+            const taskData = {
+                ...formData,
+                dueDate: dueDate?.toISOString().split('T')[0],
+                dueTime: dueTime ? dueTime.format('HH:mm') : undefined,
+            };
+
+            const response = await fetch('http://localhost:3001/api/task', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(taskData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create task');
+            }
+
+            const result = await response.json();
+            console.log('Task created:', result);
+            setOpenDialog(false);
+            
+            setFormData({
+                title: '',
+                description: '',
+                email: user?.primaryEmailAddress?.emailAddress || '',
+            });
+            setDueDate(undefined);
+            setDueTime(null);
+ 
+        } catch (error) {
+            console.error('Error creating task:', error);
+        }
     };
 
     return (
